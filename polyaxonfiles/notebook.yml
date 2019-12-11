@@ -1,0 +1,19 @@
+---
+version: 1
+
+kind: notebook
+backend: lab
+environment:
+  resources:
+    cpu:
+      requests: 2
+      limits: 4
+    memory:
+      requests: 1000
+      limits: 7000
+
+build:
+  image: python:3.7.4
+  build_steps:
+    - pip install jupyterlab
+    - pip install -r requirements.txt
