@@ -7,6 +7,9 @@ build:
   build_steps:
     - pip install -r requirements.txt
 
+declarations:
+  train_channel: /data/project_1
+
 run:
   cmd:
-    - python ./src/get_data.py
+    - python ./src/get_data.py --train_channel={{ train_channel }}

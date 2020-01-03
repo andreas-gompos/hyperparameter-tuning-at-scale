@@ -31,7 +31,8 @@ hptuning:
       optimization: maximize
 
 declarations:
-  is_polyaxon_env: 1
+  train_channel: /data/project_1
+  model_dir: ./
 
 build:
   image: python:3.7.4
@@ -40,6 +41,7 @@ build:
 
 run:
   cmd:
-    - python ./src/train_log_reg.py --C={{ C }}
+    - python ./src/polyaxon_train.py --C={{ C }}
       --penalty={{ penalty }}
-      --is_polyaxon_env={{ is_polyaxon_env }}
+      --train_channel={{ train_channel }}
+      --model_dir={{ model_dir }}
