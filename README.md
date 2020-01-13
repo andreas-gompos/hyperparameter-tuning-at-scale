@@ -33,6 +33,11 @@ Validate you are logged in: `polyaxon cluster`
 
 ### Train on Polyaxon
 
+> #### Assumptions for the following to work
+>
+> 1. You need to have a polyaxon cluster running
+
+
 ```bash
 - create a project
 `polyaxon project create --name=project-1`
@@ -54,6 +59,21 @@ Validate you are logged in: `polyaxon cluster`
 ```
 
 ## SageMaker
+### High Level Workflow
+
+With SageMaker first you need to create a docker image holding the training environment along with the training code on ECR. The training data lives in S3.
+On runtime, SageMaker downloads the docker image from ECR and the training data from S3. Therefore, you need to have your training image in ECR, your data in S3, provide those paths to SageMaker configs and provide a role that has access to all these resources.
+
+
+> #### Assumptions for the following to work
+>
+> 1. Generate the dummy training data using the `get_data.py` script
+> 2. Upload the training data to a S3 bucket
+> 3. In `sagemaker/create_hp_job.py` update:
+>
+>     - the S3 bucket
+>     - the ECR repo
+>     - the RoleArn
 
 ### Build and Push Docker Image for Training
 
