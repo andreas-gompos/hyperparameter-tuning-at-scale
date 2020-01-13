@@ -1,26 +1,23 @@
-import os
+import argparse
 
-import pandas as pd
-from sklearn.datasets import make_classification
-
-
-def create_data_directory(data_dir):
-    if not os.path.exists(data_dir):
-        os.makedirs(data_dir)
+from helpers.helpers import get_data
 
 
-def get_data(data_dir):
-    x_data, y_data = make_classification(n_samples=1000000, n_features=10)
-
-    pd.DataFrame(x_data).to_csv(os.path.join(data_dir, "x_data.csv"))
-    pd.DataFrame(y_data).to_csv(os.path.join(data_dir, "y_data.csv"))
+def parse_arguments():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--train_channel",
+        type=str,
+        help="Local directory where training data lives",
+        required=True,
+    )
+    return parser.parse_known_args()[0]
 
 
 def main():
-    create_data_directory(DATA_DIR)
-    get_data(DATA_DIR)
+    get_data(ARGS.train_channel)
 
 
 if __name__ == "__main__":
-    DATA_DIR = "/data/project_1"
+    ARGS = parse_arguments()
     main()
